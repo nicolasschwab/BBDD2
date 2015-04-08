@@ -1,5 +1,5 @@
 package bd2.model;
-
+//hola nico
 import java.util.Date;
 
 /**
