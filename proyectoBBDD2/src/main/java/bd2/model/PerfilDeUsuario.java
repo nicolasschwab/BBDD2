@@ -22,6 +22,9 @@ public class PerfilDeUsuario {
 	 * 		Usuario al cual pertenece el perfil
 	 * 
 	 */
+	public PerfilDeUsuario(){
+		
+	}
 	public PerfilDeUsuario(Date fechaDeCreacion, Usuario usuario){
 		this.setUsuario(usuario);
 		this.setFechaDeCreacion(fechaDeCreacion);
@@ -29,7 +32,14 @@ public class PerfilDeUsuario {
 	private Boolean esCreador=false;
 	private Usuario usuario;
 	private Date fechaDeCreacion;
+	private int idPerfilUsuario;
 	
+	public int getIdPerfilUsuario() {
+		return idPerfilUsuario;
+	}
+	public void setIdPerfilUsuario(int idPerfilUsuario) {
+		this.idPerfilUsuario = idPerfilUsuario;
+	}
 	/**
 	 * metodo getter que devuelve el usuario del perfil
 	 * 		

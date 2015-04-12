@@ -13,7 +13,9 @@ public class Usuario {
 	 *  
 	 * 
 	 */
-
+	public Usuario(){
+		
+	}
 	
 	public Usuario(String email, String nombre){
 		this.setEmail(email);
@@ -21,7 +23,16 @@ public class Usuario {
 	}
 	private String email;
 	private String nombre;
+	private int idUsuario;
 	
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
 	/**
 	 *  método getter que devuelve el valor de la variable email
 	 *  	  

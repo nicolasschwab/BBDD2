@@ -22,6 +22,9 @@ public class Proyecto {
 	 * 		Usuario que se desea asignar como creador del proyecto
 	 * 
 	 */
+	public Proyecto(){
+		
+	}
 	
 	public Proyecto(Usuario creador){ // 
 		PerfilDeAdministrador pa = new PerfilDeAdministrador(new Date(), creador);
@@ -33,9 +36,16 @@ public class Proyecto {
 	private Collection<PerfilDeUsuario> perfiles=new HashSet<PerfilDeUsuario>();
 	private Collection<Pizarra> pizarras=new HashSet<Pizarra>();
 	private Collection<Pizarra>pizarrasArchivadas=new HashSet<Pizarra>();
+	private int idProyecto;
 	//private Collection<Usuario> integrantes=new HashSet<Usuario>();
 	//private Usuario creador;
 	
+	public int getIdProyecto() {
+		return idProyecto;
+	}
+	public void setIdProyecto(int idProyecto) {
+		this.idProyecto = idProyecto;
+	}
 	/**
 	 *metodo getter que devuelve los perfiles asosiados al proyecto
 	 * 

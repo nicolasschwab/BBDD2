@@ -1,8 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC 
- "-//Hibernate/Hibernate Mapping DTD//EN"
+ "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
  "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="bd2.model">
+
+<class name="Paso" table="Paso">
+	<id name="idPaso" column="idPaso">
+		<generator class="native"/>
+	</id>
+	<property name="fechaDeIngreso" not-null="true" />
+	<many-to-one name="pizarra"
+	column="pizarra"
+	unique="true"
+	not-null="true"
+	cascade="all" />
+	
+</class>
+
+<class name="Proyecto" table="Proyecto">
+	<id name="idProyecto" column="idProyecto">
+		<generator class="native"/>
+	</id>
+	<set name="perfiles"
+			cascade="all">
+	<key column="idProyecto" />
+	<one-to-many class="PerfilDeUsuario" />
+	</set>
+	<set name="pizarras"
+			cascade="all">
+	<key column="idProyecto" />
+	<one-to-many class="Pizarra" />
+	</set>
+	<set name="pizarrasArchivadas"
+			cascade="all">
+	<key column="idProyecto" />
+	<one-to-many class="Pizarra" />
+	</set>
+	
+</class>
+
+<class name="Usuario" table="Usuario">
+	<id name="idUsuario" column="idUsuario">
+		<generator class="native"/>
+	</id>
+	<property name="email" not-null="true" />
+	<property name="nombre" not-null="true" />
+</class>
+
+<class name="PerfilDeUsuario" table="PerfilDeUsuario">
+	<id name="idPerfilUsuario" column="idPerfilUsuario">
+		<generator class="native"/>
+	</id>
+	<discriminator column="perfilAdministrador" type="string"/>	
+	<property name="esCreador" not-null="true" />
+	<property name="fechaDeCreacion" not-null="true" />
+	<many-to-one name="usuario"
+		column="idUsuario"
+		unique="true"
+		not-null="true"
+		cascade="all" />
+	<subclass name="PerfilDeAdministrador"
+		discriminator-value="PA">
+		<join table="PerfilDeAdministrador">
+		<key column="idAdministrador"/>
+		</join>
+	</subclass>
+</class>
+
+<class name="Sitio" table="Sitio">
+<id name="idSitio" column="idSitio">
+<generator class="native"/> <!-- Se debe hacer un id para las tablas o con nombre ya bastaria? -->
+</id>
+
+<set name="usuarios"
+			cascade="all">
+	<key column="idSitio" />
+	<one-to-many class="Usuario" />
+</set>
+<set name="proyectos"
+			cascade="all">
+	<key column="idSitio" />
+	<one-to-many class="Proyecto" />
+</set>
+</class>
+
+
+<class name="Pizarra" table="Pizarra">
+<id name="idPizarra" column="idPizarra">
+<generator class="native"/> <!-- Se debe hacer un id para las tablas o con nombre ya bastaria? -->
+</id>
+<property name="nombre" not-null="true"/>
+<set name="tareas"
+	table="Tarea"
+			cascade="all">
+	<key column="idPizarra" />
+	<one-to-many class="Tarea" />
+</set>
+
+</class>
+
+<class name="Tarea" table="Tarea">
+	<id name="idTarea" column="idTarea">
+		<generator class="native"/>
+	</id>
+	<discriminator column="tipoTarea" type="string"/>
+	<list name="pasos"	cascade="all">
+		<key column="idTarea" />
+		<list-index column="idPaso" base="0" />	
+		<one-to-many class="Paso" />
+	</list>
+	<property name="completa" not-null="true"/>
+	<property name="descripcion" not-null="true"/>
+	<property name="fechaLimite" not-null="true"/>
+	
+	<subclass name="TareaDeDesarrollo"
+		discriminator-value="TD">
+		<property name="requerimientos"
+		column="requerimientos"
+		not-null="true"/>	
+	</subclass>
+	<subclass name="TareaDeInvestigacion"
+		discriminator-value="TI">
+			<property name="hipotesis"
+			column="hipotesis"
+			not-null="true"/>
+			<property name="resultado"
+			column="resultado"
+			not-null="true"/>		
+	</subclass>
+</class>
+
+
 
 </hibernate-mapping>

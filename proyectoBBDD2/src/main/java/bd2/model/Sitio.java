@@ -24,6 +24,14 @@ public class Sitio {
 	}
 	private Collection<Usuario> usuarios= new HashSet<Usuario>();
 	private Collection<Proyecto> proyectos = new HashSet<Proyecto>();
+	private int idSitio;
+	public int getIdSitio() {
+		return idSitio;
+	}
+
+	public void setIdSitio(int idSitio) {
+		this.idSitio = idSitio;
+	}
 
 	/**
 	 * metodo registrarUsuario que agrega un nuevo usuario al proyecto

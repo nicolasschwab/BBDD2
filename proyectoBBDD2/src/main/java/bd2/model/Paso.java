@@ -23,8 +23,17 @@ public class Paso {
 	}
 	private Date fechaDeIngreso;
 	private Pizarra pizarra;
+	private  int idPaso;
 	
 	
+
+	public int getIdPaso() {
+		return idPaso;
+	}
+
+	public void setIdPaso(int idPaso) {
+		this.idPaso = idPaso;
+	}
 
 	/**
 	 * metodo getter que devuelve los fecha de ingreso de la pizarra que cambió de lugar

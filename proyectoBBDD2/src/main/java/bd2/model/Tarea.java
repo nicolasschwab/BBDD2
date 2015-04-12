@@ -38,6 +38,13 @@ public abstract class Tarea {
 	private Date fechaLimite;
 	private String descripcion;
 	private Collection<Paso> pasos=new ArrayList<Paso>();
+	private int idTarea;
+	public int getIdTarea() {
+		return idTarea;
+	}
+	public void setIdTarea(int idTarea) {
+		this.idTarea = idTarea;
+	}
 	/**
 	 *  método agregarAPizarra Se agrega la tarea a la pizarra enviada como parámetro.  
 	 * Se registra este movimiendo generando un nuevo Paso y agregándolo a su colección de pasos, 

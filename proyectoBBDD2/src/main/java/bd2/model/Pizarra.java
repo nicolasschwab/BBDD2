@@ -11,23 +11,28 @@ import java.util.HashSet;
  * 
  * @version 1.0
  */
-
-
-
-
 public class Pizarra {
-	
 	/**
 	 *  Constructor de la clase Pizarra, setea el nombre de la misma
 	 * 
 	 * 
 	 */
+	public Pizarra(){
+		
+	}
 	public Pizarra(String nombre){  // 
 		this.setNombre(nombre);
 	}
 	private String nombre;
 	private Collection<Tarea> tareas = new HashSet<Tarea>();
+	private int idPizarra;
 	
+	public int getIdPizarra() {
+		return idPizarra;
+	}
+	public void setIdPizarra(int idPizarra) {
+		this.idPizarra = idPizarra;
+	}
 	/**
 	 *  metodo getter que devuelve el nombre de la pizarra
 	 * 

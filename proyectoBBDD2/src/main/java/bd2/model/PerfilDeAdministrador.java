@@ -21,19 +21,30 @@ public class PerfilDeAdministrador extends PerfilDeUsuario{
 	 * 		Usuario al cual pertenece el perfil
 	 * 
 	 */
+	public PerfilDeAdministrador(){
+		
+	}
 	public PerfilDeAdministrador(Date fechaDeCreacion, Usuario usuario) {
 		super(fechaDeCreacion, usuario);
 	}
 
 	//private Boolean esCreador;
-
+	private int idAdministrador;
 	
 //	public Boolean getEsCreador() {
 //		return esCreador;
 //	}
 
 
-//	public void setEsCreador(Boolean esCreador) {
+public int getIdAdministrador() {
+		return idAdministrador;
+	}
+
+	public void setIdAdministrador(int idAdministrador) {
+		this.idAdministrador = idAdministrador;
+	}
+
+	//	public void setEsCreador(Boolean esCreador) {
 //		this.esCreador = esCreador;
 //	}
 	/**
