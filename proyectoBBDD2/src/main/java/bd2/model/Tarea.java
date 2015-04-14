@@ -38,11 +38,11 @@ public abstract class Tarea {
 	private Date fechaLimite;
 	private String descripcion;
 	private Collection<Paso> pasos=new ArrayList<Paso>();
-	private int idTarea;
-	public int getIdTarea() {
+	private Long idTarea;
+	public Long getIdTarea() {
 		return idTarea;
 	}
-	public void setIdTarea(int idTarea) {
+	public void setIdTarea(Long idTarea) {
 		this.idTarea = idTarea;
 	}
 	/**

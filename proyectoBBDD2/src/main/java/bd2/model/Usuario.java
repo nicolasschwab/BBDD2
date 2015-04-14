@@ -23,13 +23,13 @@ public class Usuario {
 	}
 	private String email;
 	private String nombre;
-	private int idUsuario;
+	private Long idUsuario;
 	
-	public int getIdUsuario() {
+	public Long getIdUsuario() {
 		return idUsuario;
 	}
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

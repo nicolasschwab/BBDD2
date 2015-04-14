@@ -12,7 +12,7 @@
 	<property name="fechaDeIngreso" not-null="true" />
 	<many-to-one name="pizarra"
 	column="pizarra"
-	unique="true"
+	unique="true"<!--  cambiar -->
 	not-null="true"
 	cascade="all" />
 	
@@ -117,17 +117,14 @@
 	<subclass name="TareaDeDesarrollo"
 		discriminator-value="TD">
 		<property name="requerimientos"
-		column="requerimientos"
-		not-null="true"/>	
+		column="requerimientos"/>	
 	</subclass>
 	<subclass name="TareaDeInvestigacion"
 		discriminator-value="TI">
 			<property name="hipotesis"
-			column="hipotesis"
-			not-null="true"/>
+			column="hipotesis"/>
 			<property name="resultado"
-			column="resultado"
-			not-null="true"/>		
+			column="resultado"/>		
 	</subclass>
 </class>
 
