@@ -25,12 +25,12 @@ public class Pizarra {
 	}
 	private String nombre;
 	private Collection<Tarea> tareas = new HashSet<Tarea>();
-	private int idPizarra;
+	private Long idPizarra;
 	
-	public int getIdPizarra() {
+	public Long getIdPizarra() {
 		return idPizarra;
 	}
-	public void setIdPizarra(int idPizarra) {
+	public void setIdPizarra(Long idPizarra) {
 		this.idPizarra = idPizarra;
 	}
 	/**

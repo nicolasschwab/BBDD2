@@ -23,15 +23,15 @@ public class Paso {
 	}
 	private Date fechaDeIngreso;
 	private Pizarra pizarra;
-	private  int idPaso;
+	private  Long idPaso;
 	
 	
 
-	public int getIdPaso() {
+	public Long getIdPaso() {
 		return idPaso;
 	}
 
-	public void setIdPaso(int idPaso) {
+	public void setIdPaso(Long idPaso) {
 		this.idPaso = idPaso;
 	}
 

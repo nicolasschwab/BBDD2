@@ -10,12 +10,11 @@
 		<generator class="native"/>
 	</id>
 	<property name="fechaDeIngreso" not-null="true" />
-	<many-to-one name="pizarra"
-	column="pizarra"
-	unique="true"<!--  cambiar -->
+	 <many-to-one name="pizarra"
+	column="pizarra"	
 	not-null="true"
 	cascade="all" />
-	
+	<!--  unique="true"--> 
 </class>
 
 <class name="Proyecto" table="Proyecto">
@@ -110,9 +109,9 @@
 		<list-index column="idPaso" base="0" />	
 		<one-to-many class="Paso" />
 	</list>
-	<property name="completa" not-null="true"/>
-	<property name="descripcion" not-null="true"/>
-	<property name="fechaLimite" not-null="true"/>
+	<property name="completa"/>
+	<property name="descripcion"/>
+	<property name="fechaLimite"/>
 	
 	<subclass name="TareaDeDesarrollo"
 		discriminator-value="TD">
