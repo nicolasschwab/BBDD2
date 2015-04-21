@@ -106,7 +106,7 @@
 	<discriminator column="tipoTarea" type="string"/>
 	<list name="pasos"	cascade="all">
 		<key column="idTarea" />
-		<list-index column="idPaso" base="0" />	
+		<list-index column="idPaso_index" base="0" />	
 		<one-to-many class="Paso" />
 	</list>
 	<property name="completa"/>

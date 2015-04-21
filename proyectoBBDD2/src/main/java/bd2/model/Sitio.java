@@ -24,12 +24,12 @@ public class Sitio {
 	}
 	private Collection<Usuario> usuarios= new HashSet<Usuario>();
 	private Collection<Proyecto> proyectos = new HashSet<Proyecto>();
-	private int idSitio;
-	public int getIdSitio() {
+	private Long idSitio;
+	public Long getIdSitio() {
 		return idSitio;
 	}
 
-	public void setIdSitio(int idSitio) {
+	public void setIdSitio(Long idSitio) {
 		this.idSitio = idSitio;
 	}
 

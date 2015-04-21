@@ -32,12 +32,12 @@ public class PerfilDeUsuario {
 	private Boolean esCreador=false;
 	private Usuario usuario;
 	private Date fechaDeCreacion;
-	private int idPerfilUsuario;
+	private Long idPerfilUsuario;
 	
-	public int getIdPerfilUsuario() {
+	public Long getIdPerfilUsuario() {
 		return idPerfilUsuario;
 	}
-	public void setIdPerfilUsuario(int idPerfilUsuario) {
+	public void setIdPerfilUsuario(Long idPerfilUsuario) {
 		this.idPerfilUsuario = idPerfilUsuario;
 	}
 	/**

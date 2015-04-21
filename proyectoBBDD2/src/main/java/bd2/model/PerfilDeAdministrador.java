@@ -29,18 +29,18 @@ public class PerfilDeAdministrador extends PerfilDeUsuario{
 	}
 
 	//private Boolean esCreador;
-	private int idAdministrador;
+	private Long idAdministrador;
 	
 //	public Boolean getEsCreador() {
 //		return esCreador;
 //	}
 
 
-public int getIdAdministrador() {
+public Long getIdAdministrador() {
 		return idAdministrador;
 	}
 
-	public void setIdAdministrador(int idAdministrador) {
+	public void setIdAdministrador(Long idAdministrador) {
 		this.idAdministrador = idAdministrador;
 	}
 

@@ -36,14 +36,14 @@ public class Proyecto {
 	private Collection<PerfilDeUsuario> perfiles=new HashSet<PerfilDeUsuario>();
 	private Collection<Pizarra> pizarras=new HashSet<Pizarra>();
 	private Collection<Pizarra>pizarrasArchivadas=new HashSet<Pizarra>();
-	private int idProyecto;
+	private Long idProyecto;
 	//private Collection<Usuario> integrantes=new HashSet<Usuario>();
 	//private Usuario creador;
 	
-	public int getIdProyecto() {
+	public Long getIdProyecto() {
 		return idProyecto;
 	}
-	public void setIdProyecto(int idProyecto) {
+	public void setIdProyecto(Long idProyecto) {
 		this.idProyecto = idProyecto;
 	}
 	/**
