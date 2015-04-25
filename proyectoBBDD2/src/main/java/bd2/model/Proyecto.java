@@ -28,7 +28,7 @@ public class Proyecto {
 	
 	public Proyecto(Usuario creador){ // 
 		PerfilDeAdministrador pa = new PerfilDeAdministrador(new Date(), creador);
-		pa.setEsCreador(true);
+		pa.setCreador(true);
 	//	this.setCreador(creador);
 	//	this.getIntegrantes().add(creador);
 		this.getPerfiles().add(pa);
@@ -127,8 +127,19 @@ public class Proyecto {
 	 * 
 	 */
 	public void agregarColaborador(Usuario colaborador){
-		PerfilDeUsuario perfilU= new PerfilDeUsuario(new Date(), colaborador);
-		this.getPerfiles().add(perfilU);
+		boolean noEsta=true;
+		for(PerfilDeUsuario perfil: this.perfiles){
+			if(perfil.esColaborador()){
+				if(perfil.getUsuario()==colaborador){
+					noEsta=false;
+				}
+			}
+		}
+		if(noEsta){
+			PerfilDeUsuario perfilU= new PerfilDeUsuario(new Date(), colaborador);
+			this.getPerfiles().add(perfilU);
+		}
+		
 		//this.getIntegrantes().add(colaborador);
 	}
 	/**
@@ -138,8 +149,19 @@ public class Proyecto {
 	 * 
 	 */
 	public void agregarAdministrador(Usuario administrador){
-		PerfilDeAdministrador perfilA= new PerfilDeAdministrador(new Date(), administrador);
-		this.getPerfiles().add(perfilA);
+		boolean noEsta=true;
+		for(PerfilDeUsuario perfil: this.perfiles){
+			if(!perfil.esColaborador()){
+				if(perfil.getUsuario()==administrador){
+					noEsta=false;
+				}
+			}
+		}
+		if(noEsta){
+			PerfilDeAdministrador perfilA= new PerfilDeAdministrador(new Date(), administrador);
+			this.getPerfiles().add(perfilA);
+		}
+		
 		//this.getIntegrantes().add(administrador);
 	}
 	/**
@@ -156,16 +178,14 @@ public class Proyecto {
 			while(i.hasNext()&& encontrado==false){
 				PerfilDeUsuario us = i.next();
 				if(us.getUsuario().equals(pusuario)){
-					us.eliminarDeProyecto(this);
-					this.getPerfiles().remove(us);
-					
+					us.eliminarDeProyecto(this);					
 					encontrado=true;
 				}
 			}
 			
 		} catch (Exception e) {
 			System.out.println("No se puede eliminar al creador del proyecto mensaje desde la clase Proyecto");
-			throw new Exception("No se puede eliminar al creador del proyecto");
+			throw e;
 		}
 		
 	}
@@ -173,11 +193,15 @@ public class Proyecto {
 	 * metodo que archiva una pizarra al proyecto
 	 * @param pizarra
 	 * 		Pizarra que se desea archivar en el proyecto
+	 * @throws Exception 
 	 * 
 	 */
-	public void archivarPizarra(Pizarra pizarra){
-		this.getPizarrasArchivadas().add(pizarra);
-		this.getPizarras().remove(pizarra);
+	public void archivarPizarra(Pizarra pizarra) {
+		
+		if(this.getPizarras().contains(pizarra)){
+			this.getPizarrasArchivadas().add(pizarra);
+			this.getPizarras().remove(pizarra);
+		}
 	}
 	/**
 	 * metodo que agrega una pizarra al proyecto
@@ -199,11 +223,17 @@ public class Proyecto {
 		Usuario elCreador=null;
 		while(i.hasNext()&& encontrado==false){
 			PerfilDeUsuario us = i.next();
-			if(us.getEsCreador()){
+			if(us.esCreador()){
 				elCreador=us.getUsuario();
 			}
 		}
 		return elCreador;
+	}
+
+	public void eliminarPerfil(PerfilDeUsuario perfilDeUsuario) {
+		// TODO Auto-generated method stub
+		this.perfiles.remove(perfilDeUsuario); // preguntar como eleiminar el perfil, no se si esto es lo que piden
+		
 	}
 	
 

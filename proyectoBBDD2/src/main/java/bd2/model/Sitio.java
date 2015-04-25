@@ -53,7 +53,10 @@ public class Sitio {
 	 */
 
 	public void agregarProyecto(Proyecto proyecto){
-		this.getProyectos().add(proyecto);
+		if(!this.getProyectos().contains(proyecto)){
+			this.getProyectos().add(proyecto);
+		}
+		
 	}
 	
 	/**

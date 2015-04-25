@@ -29,9 +29,9 @@ public class PerfilDeUsuario {
 		this.setUsuario(usuario);
 		this.setFechaDeCreacion(fechaDeCreacion);
 	}
-	private Boolean esCreador=false;
-	private Usuario usuario;
-	private Date fechaDeCreacion;
+	
+	protected Usuario usuario;
+	protected Date fechaDeCreacion;
 	private Long idPerfilUsuario;
 	
 	public Long getIdPerfilUsuario() {
@@ -75,22 +75,14 @@ public class PerfilDeUsuario {
 		this.fechaDeCreacion = fechaDeCreacion;
 	}
 	/**
-	 * metodo getter que devuelve si el usuario es el creador del proyecto
+	 * metodo esCreador que retorna si el perfil de usuario pertenece al creador del proyecto
 	 * 
 	 * 
 	 */
-	public Boolean getEsCreador() { // 
-		return esCreador;
+	public boolean esCreador(){
+		return false;
 	}
-	/**
-	 * metodo setter que asigna si el usuario es el creador del proyecto
-	 * @param esCreador
-	 * 		Variable booleana que indica si el usuario es o no creador del proyecto
-	 * 
-	 */
-	public void setEsCreador(Boolean esCreador) { // 
-		this.esCreador = esCreador;
-	}
+	
 	/**
 	 * metodo que elimina el perfil de los intgrantes del proyecto
 	 * @param proyecto
@@ -98,6 +90,22 @@ public class PerfilDeUsuario {
 	 * 
 	 */
 	public void eliminarDeProyecto(Proyecto proyecto) throws Exception { 
-		proyecto.getIntegrantes().remove(this.getUsuario());
+		
+		if(this.esCreador()){
+			System.out.println("No se puede eliminar al creador del proyecto msj desde la clase PerfilDeUsuario");  // Es imposible que el usuario seal el admin , pero pongo el if por las dudas
+			throw new Exception("No se puede eliminar al creador del proyecto");
+		}else{
+			proyecto.eliminarPerfil(this);
+		}
+		
+	}
+	
+	/**
+	 * Este metodo es usado para corroborar si el proyecto ya posee o no un perfil con el usuario que le entra como parametro
+	 * 
+	 */
+	public boolean esColaborador() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

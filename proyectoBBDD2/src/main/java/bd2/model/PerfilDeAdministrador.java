@@ -26,22 +26,35 @@ public class PerfilDeAdministrador extends PerfilDeUsuario{
 	}
 	public PerfilDeAdministrador(Date fechaDeCreacion, Usuario usuario) {
 		super(fechaDeCreacion, usuario);
+		this.creador=false;
 	}
 
-	//private Boolean esCreador;
+	private Boolean creador;
 	private Long idAdministrador;
 	
 //	public Boolean getEsCreador() {
 //		return esCreador;
 //	}
+	
 
-
-public Long getIdAdministrador() {
+	public Long getIdAdministrador() {
 		return idAdministrador;
 	}
 
+	public Boolean getCreador() {
+	return creador;
+	}
+	
+	public void setCreador(Boolean creador) {
+		this.creador = creador;
+	}
+	
 	public void setIdAdministrador(Long idAdministrador) {
 		this.idAdministrador = idAdministrador;
+	}
+	
+	public boolean esCreador(){
+		return this.creador;
 	}
 
 	//	public void setEsCreador(Boolean esCreador) {
@@ -54,12 +67,21 @@ public Long getIdAdministrador() {
 	 */
 
 	public void eliminarDeProyecto(Proyecto proyecto) throws Exception{
-		if( this.getEsCreador()){
+		if( this.esCreador()){
 			System.out.println("No se puede eliminar al creador del proyecto msj desde la clase PerfilDeAdministrador");
 			throw new Exception("No se puede eliminar al creador del proyecto");
 		}
 		else {
-			super.eliminarDeProyecto(proyecto);
+			proyecto.eliminarPerfil(this);
 		}
+	}
+	
+	/**
+	 * Este metodo es usado para corroborar si el proyecto ya posee o no un perfil con el usuario que le entra como parametro
+	 * 
+	 */
+	public boolean esColaborador() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

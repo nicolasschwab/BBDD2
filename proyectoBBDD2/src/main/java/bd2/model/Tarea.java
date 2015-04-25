@@ -34,9 +34,9 @@ public abstract class Tarea {
 	public Tarea(){
 		
 	}
-	private Boolean completa;
-	private Date fechaLimite;
-	private String descripcion;
+	protected Boolean completa;
+	protected Date fechaLimite;
+	protected String descripcion;
 	private Collection<Paso> pasos=new ArrayList<Paso>();
 	private Long idTarea;
 	public Long getIdTarea() {
