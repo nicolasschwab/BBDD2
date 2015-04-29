@@ -78,7 +78,7 @@
 	  <property name="fechaDeCreacion" not-null="true" />
 	  <many-to-one name="usuario"
 			column="idUsuario"
-			unique="true"
+
 			not-null="true"
 			cascade="all" />
             
@@ -141,7 +141,7 @@
 	<subclass name="TareaDeDesarrollo"
 		discriminator-value="TD">
 		<property name="requerimientos"
-		column="requerimientos"/>	
+		column="requerimientos" type="string" length="600"/>	
 	</subclass>
 	<subclass name="TareaDeInvestigacion"
 		discriminator-value="TI">
