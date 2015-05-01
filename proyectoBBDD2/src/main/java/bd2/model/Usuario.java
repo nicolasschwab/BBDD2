@@ -77,7 +77,7 @@ public class Usuario {
 	public boolean equals(Object obj){
 		if (obj instanceof Usuario){
 				Usuario user=(Usuario)obj;
-			if ((this.getNombre()==user.getNombre()) && (this.getEmail()==user.getEmail())){
+			if ((this.getNombre().equals(user.getNombre())) && (this.getEmail().equals(user.getEmail()))){
 				return true;
 			}
 			else{
