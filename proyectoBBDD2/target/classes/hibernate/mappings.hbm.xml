@@ -13,7 +13,7 @@
 	 <many-to-one name="pizarra"
 	column="pizarra"	
 	not-null="true"
-	cascade="all" />
+	 />
 	<!--  unique="true"--> 
 </class>
 
@@ -47,29 +47,54 @@
 	<property name="nombre" not-null="true" />
 </class>
 
-<class name="PerfilDeUsuario" table="PerfilDeUsuario">
-	<id name="idPerfilUsuario" column="idPerfilUsuario">
-		<generator class="native"/>
-	</id>
-	<discriminator column="perfilAdministrador" type="string"/>	
-	<property name="esCreador" not-null="true" />
-	<property name="fechaDeCreacion" not-null="true" />
-	<many-to-one name="usuario"
-		column="idUsuario"
-		unique="true"
-		not-null="true"
-		cascade="all" />
-	<subclass name="PerfilDeAdministrador"
-		discriminator-value="PA">
-		<join table="PerfilDeAdministrador">
-		<key column="idAdministrador"/>
-		</join>
-	</subclass>
-</class>
+<!-- <class name="PerfilDeUsuario" table="PerfilDeUsuario"> -->
+<!-- 	<id name="idPerfilUsuario" column="idPerfilUsuario"> -->
+<!-- 		<generator class="native"/> -->
+<!-- 	</id> -->
+<!-- 	<discriminator column="perfilAdministrador" type="string"/>	 -->
+<!-- 	<property name="esCreador" not-null="true" /> -->
+<!-- 	<property name="fechaDeCreacion" not-null="true" /> -->
+<!-- 	<many-to-one name="usuario" -->
+<!-- 		column="idUsuario" -->
+<!-- 		unique="true" -->
+<!-- 		not-null="true" -->
+<!-- 		cascade="all" /> -->
+<!-- 	<subclass name="PerfilDeAdministrador" -->
+<!-- 		discriminator-value="PA"> -->
+<!-- 		<join table="PerfilDeAdministrador"> -->
+<!-- 		<key column="idAdministrador"/> -->
+<!-- 		</join> -->
+<!-- 	</subclass> -->
+<!-- </class> -->
+
+
+<!-- Prueba mapeo perfil de usuario -->
+
+<class name="PerfilDeUsuario" table="perfilesDeUsuario">  
+	  <id name="idPerfilUsuario" column="idPerfilUsuario">  
+	  <generator class="native"></generator>  
+	  </id>       
+<!-- 	  <property name="esCreador" not-null="true" />    Creo que esto es un metodo logico que se usa en java, el perfil de usuario no deberia tener este campo en la tabla -->
+	  <property name="fechaDeCreacion" not-null="true" />
+	  <many-to-one name="usuario"
+			column="idUsuario"
+
+			not-null="true"
+			/>
+            
+	  <joined-subclass name="PerfilDeAdministrador" table="perfilesDeAdministrador">  
+		  <key column="idPerfilAdministrador"></key>
+		  <property name="creador" column="creador"></property>  
+	  </joined-subclass>       
+  </class>  
+
+
+<!-- fin prueba -->
+
 
 <class name="Sitio" table="Sitio">
 <id name="idSitio" column="idSitio">
-<generator class="native"/> <!-- Se debe hacer un id para las tablas o con nombre ya bastaria? -->
+<generator class="native"/> 
 </id>
 
 <set name="usuarios"
@@ -116,7 +141,7 @@
 	<subclass name="TareaDeDesarrollo"
 		discriminator-value="TD">
 		<property name="requerimientos"
-		column="requerimientos"/>	
+		column="requerimientos" type="string" length="600"/>	
 	</subclass>
 	<subclass name="TareaDeInvestigacion"
 		discriminator-value="TI">

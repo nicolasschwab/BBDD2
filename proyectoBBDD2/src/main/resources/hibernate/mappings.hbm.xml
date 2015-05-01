@@ -13,7 +13,7 @@
 	 <many-to-one name="pizarra"
 	column="pizarra"	
 	not-null="true"
-	cascade="all" />
+	 />
 	<!--  unique="true"--> 
 </class>
 
@@ -80,7 +80,7 @@
 			column="idUsuario"
 
 			not-null="true"
-			cascade="all" />
+			/>
             
 	  <joined-subclass name="PerfilDeAdministrador" table="perfilesDeAdministrador">  
 		  <key column="idPerfilAdministrador"></key>
@@ -94,7 +94,7 @@
 
 <class name="Sitio" table="Sitio">
 <id name="idSitio" column="idSitio">
-<generator class="native"/> <!-- Se debe hacer un id para las tablas o con nombre ya bastaria? -->
+<generator class="native"/> 
 </id>
 
 <set name="usuarios"
