@@ -73,4 +73,19 @@ public class Usuario {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public boolean equals(Object obj){
+		if (obj instanceof Usuario){
+				Usuario user=(Usuario)obj;
+			if ((this.getNombre()==user.getNombre()) && (this.getEmail()==user.getEmail())){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	
 }
