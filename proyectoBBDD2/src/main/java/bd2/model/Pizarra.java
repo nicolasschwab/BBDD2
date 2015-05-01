@@ -75,13 +75,15 @@ public class Pizarra {
 	 * 		Pizarra a la cual se desea mover la tarea
 	 */
 	public void moverTareaAPizarra(Tarea tarea, Pizarra pizarraDestino){ //
-		if(pizarraDestino!=this){
+		if(!pizarraDestino.equals(this)){
 			if(this.getTareas().contains(tarea)){
 				this.getTareas().remove(tarea);
 				//pizarraDestino.getTareas().add(tarea);
 				tarea.agregarAPizarra(pizarraDestino);
 			}
 			else{ System.out.println("La tarea no se encuentra en la pizarra");}
+		}else{
+			System.out.println("La pizarra destino es la misma que la pizarra origen");
 		}
 		
 	}

@@ -128,10 +128,13 @@ public class Proyecto {
 	 */
 	public void agregarColaborador(Usuario colaborador){
 		boolean noEsta=true;
-		for(PerfilDeUsuario perfil: this.perfiles){
-			if(perfil.esColaborador()){
-				if(perfil.getUsuario()==colaborador){
+		java.util.Iterator<PerfilDeUsuario> i = this.getPerfiles().iterator();
+		while(i.hasNext() && noEsta){
+			PerfilDeUsuario us = i.next();
+			if(us.esColaborador()){
+				if(us.getUsuario().equals(colaborador)){
 					noEsta=false;
+					System.out.println("El usuario ya es colaborador en el proyecto");
 				}
 			}
 		}
@@ -150,9 +153,11 @@ public class Proyecto {
 	 */
 	public void agregarAdministrador(Usuario administrador){
 		boolean noEsta=true;
-		for(PerfilDeUsuario perfil: this.perfiles){
-			if(!perfil.esColaborador()){
-				if(perfil.getUsuario()==administrador){
+		java.util.Iterator<PerfilDeUsuario> i = this.getPerfiles().iterator();
+		while(i.hasNext() && noEsta){
+			PerfilDeUsuario us = i.next();
+			if(!us.esColaborador()){
+				if(us.getUsuario().equals(administrador)){
 					noEsta=false;
 				}
 			}
