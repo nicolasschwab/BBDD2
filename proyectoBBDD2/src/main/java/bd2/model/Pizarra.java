@@ -97,4 +97,18 @@ public class Pizarra {
 		//this.getTareas().add(tarea);
 		tarea.agregarAPizarra(this);
 	}
+	
+	public boolean equals(Object obj){
+		if (obj instanceof Pizarra){
+				Pizarra pizarra=(Pizarra)obj;
+			if ((this.getNombre().equals(pizarra.getNombre()))){
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		return false;
+	}
+	
 }
