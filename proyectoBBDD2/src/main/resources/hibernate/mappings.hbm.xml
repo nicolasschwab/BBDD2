@@ -33,7 +33,7 @@
 	</set>
 	<set name="pizarrasArchivadas"
 			cascade="all">
-	<key column="idProyectoArchivador" />
+	<key column="idProyectoArchivador" /> <!-- Le cambio el nombre porque sino lo va a asociar con el atributo idProyecto mapeado por pizarra y no diferenciaria si esta archivada o no -->
 	<one-to-many class="Pizarra" />
 	</set>
 	

@@ -70,7 +70,8 @@ public class Queries {
 		System.out.println("----------interlineado--------");
 		List<String> coleccion= sesion.createQuery("select usuario.email from PerfilDeAdministrador as PDA where PDA IN "
 				+ "(select perf from Proyecto as p inner join p.perfiles as perf where perf.class = PerfilDeAdministrador and p.pizarrasArchivadas.size > 0)").list();
-/*		List<String> prueba1= sesion.createQuery("select usuario.email from PerfilDeAdministrador").list();
+/*		
+  		List<String> prueba1= sesion.createQuery("select usuario.email from PerfilDeAdministrador").list();
 		for(String iteracion: prueba1){
 			System.out.println("Soy Administrador: "+iteracion);
 		}
@@ -78,7 +79,8 @@ public class Queries {
 		List<String> prueba2= sesion.createQuery("select perfiles.usuario.email from Proyecto p inner join p.perfiles as perfiles where p.idProyecto = 1 or p.idProyecto = 3").list();
 		for(String iteracion: prueba2){
 			System.out.println("Pertenezco a uno de los proyectos con pizarras archivadas: "+iteracion);
-		} */
+		}
+ */
 		
 		for(String iteracion: coleccion){
 			System.out.println("Administrador: "+iteracion);
