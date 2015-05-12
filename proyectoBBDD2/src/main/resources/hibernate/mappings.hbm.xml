@@ -33,7 +33,7 @@
 	</set>
 	<set name="pizarrasArchivadas"
 			cascade="all">
-	<key column="idProyecto" />
+	<key column="idProyectoArchivador" />
 	<one-to-many class="Pizarra" />
 	</set>
 	
