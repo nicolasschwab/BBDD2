@@ -2,6 +2,9 @@ package bd2.util;
 
 import java.util.List;
 
+
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -10,30 +13,41 @@ import org.hibernate.cfg.Configuration;
 
 import bd2.model.PerfilDeAdministrador;
 import bd2.model.PerfilDeUsuario;
+import bd2.model.Pizarra;
+import bd2.model.Tarea;
 
 public class Queries {
 	
-	private static SessionFactory sessions;
+
+	private static SessionFactory sessionFactory;
+	private static Session session;
 	
+	
+	private static void buildSessionFactory() {
+		sessionFactory = new Configuration().configure(
+				"hibernate/hibernate.cfg.xml").buildSessionFactory();
+	}
+
 	public static void main(String[] args) {
 		
-		Configuration configuration = new Configuration().configure("hibernate/hibernate.cfg.xml");
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().
-		applySettings(configuration.getProperties());
-		sessions= configuration.buildSessionFactory(builder.build());
+		buildSessionFactory();
+		
 //	-----"configuracion deprecated"------
 //		Configuration cfg = new Configuration();
 //		cfg.configure("hibernate/hibernate.cfg.xml");
 //		sessions = cfg.buildSessionFactory();
 		conexion('a');
-		conexion('b');
+		conexion('c');
+		conexion('d');
+		
 	}
 	
 	private static void conexion(char letraConsulta){
-		Session session = sessions.openSession();
+		
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
+			session = sessionFactory.openSession();
+			tx=session.beginTransaction();
 			System.out.println();
 			System.out.println("--------------------------------------------------------- interlineado --------------------------------------------------");
 			//acá hay que poner un case que dado la letra que entra por parametro es la consulta que llama
@@ -41,7 +55,8 @@ public class Queries {
 			// tenemos 8 consultas de estar forma reusamos mas codigo y es todo mas facilito
 			switch (letraConsulta){
 			case 'a': listarNombresPizarras(session,tx); break;
-			case 'b': mailDeAdminsConPizarraArchivada(session,tx); break;
+			case 'c': pizarraConMasTareas(session,tx);break;
+			case 'd': mailDeAdminsConPizarraArchivada(session,tx); break;
 			}
 			System.out.println("----------interlineado--------");
 			session.flush();
@@ -86,4 +101,14 @@ public class Queries {
 			System.out.println("Administrador: "+iteracion);
 		}
 	}
+	
+	private static void pizarraConMasTareas(Session sesion, Transaction t){
+		System.out.println("Obtener la Pizarra que tenga más tareas");
+		System.out.println("----------interlineado--------");		
+		Query nombres = sesion.createQuery(" select p,p.tareas.size as cant from Pizarra p order by cant desc");
+		nombres.setMaxResults(1);
+		Object tarea=nombres.uniqueResult(); 
+		 System.out.println("La pizarra con mas tareas es: "+((Pizarra) (((Object[]) tarea)[0])).getNombre()+" con un total de:"+(((Object[]) tarea)[1])+" tareas");
+	}
+	
 }	
