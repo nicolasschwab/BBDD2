@@ -40,6 +40,7 @@ public class Queries {
 		conexion('c');
 		conexion('d');
 		conexion('e');
+		conexion('f');
 		
 	}
 	
@@ -55,10 +56,11 @@ public class Queries {
 			//si bien se que esta forma no es la mejor en el caso de tener 1000 consultas dado que solo 
 			// tenemos 8 consultas de estar forma reusamos mas codigo y es todo mas facilito
 			switch (letraConsulta){
-			case 'a': listarNombresPizarras(session,tx); break;
-			case 'c': pizarraConMasTareas(session,tx);break;
-			case 'd': mailDeAdminsConPizarraArchivada(session,tx); break;
-			case 'e': obtenerTareasQuePasaronPorPizarraConSecuencia(session,tx); break;
+				case 'a': listarNombresPizarras(session,tx); break;
+				case 'c': pizarraConMasTareas(session,tx);break;
+				case 'd': mailDeAdminsConPizarraArchivada(session,tx); break;
+				case 'e': obtenerTareasQuePasaronPorPizarraConSecuencia(session,tx,"backlogproyecto7427"); break;
+				case 'f': obtenerTareasCambiadasDePizarraMasDeVeces(session,tx,1); break;
 			}
 			System.out.println("----------interlineado--------");
 			session.flush();
@@ -73,15 +75,31 @@ public class Queries {
 		session.disconnect();
 		
 	}
+	
+	public static List<Tarea> obtenerTareasCambiadasDePizarraMasDeVeces(
+			Session session2, Transaction tx, Integer cantidad){
+		
+		System.out.println("Obtener las tareas que hayan sido cambiadas de pizarra"
+				+ "mas de un numero de veces enviado como parámetro. Imprimir: Tarea: descripcion (cantidadDePasos)");
+		System.out.println("----------interlineado--------");
+		
+		List<Tarea> tareas = session.createQuery("select t from Tarea t where t.pasos.size > :cantidad ").setParameter("cantidad", cantidad).list();
+		for(Tarea tarea: tareas){
+			System.out.println("Tarea: "+tarea.getDescripcion()+"("+tarea.getPasos().size()+")");
+		}
+		return tareas;
+	}
+	
+	
 	public static List<Tarea> obtenerTareasQuePasaronPorPizarraConSecuencia(
-			Session session2, Transaction tx){
+			Session session2, Transaction tx, String secuencia){
 		/* Pendiente enviar el parámetro al metodo lo voy a hardcodear como prueba*/
 		
 		System.out.println("Obtener las tareas que hayan pasado por la pizarra cuyo nombre contenga una"
 				+ "secuencia de caracteres obtenida como parámetro. Imprimir Tarea: Descripción");
 		System.out.println("----------interlineado--------");
-		
-		List<Tarea> tareas = session.createQuery("select t from Pizarra p inner join p.tareas t where p.nombre like :nombreDePizarra ").setParameter("nombreDePizarra", "%"+"backlogproyecto7427"+"%").list();
+		String parametroConFormato="%"+secuencia+"%";
+		List<Tarea> tareas = session.createQuery("select t from Pizarra p inner join p.tareas t where p.nombre like :nombreDePizarra ").setParameter("nombreDePizarra", parametroConFormato).list();
 		for(Tarea tarea: tareas){
 			System.out.println("Tarea: "+tarea.getDescripcion());
 		}
