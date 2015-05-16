@@ -39,6 +39,7 @@ public class Queries {
 		conexion('a');
 		conexion('c');
 		conexion('d');
+		conexion('e');
 		
 	}
 	
@@ -57,6 +58,7 @@ public class Queries {
 			case 'a': listarNombresPizarras(session,tx); break;
 			case 'c': pizarraConMasTareas(session,tx);break;
 			case 'd': mailDeAdminsConPizarraArchivada(session,tx); break;
+			case 'e': obtenerTareasQuePasaronPorPizarraConSecuencia(session,tx); break;
 			}
 			System.out.println("----------interlineado--------");
 			session.flush();
@@ -71,16 +73,31 @@ public class Queries {
 		session.disconnect();
 		
 	}
+	public static List<Tarea> obtenerTareasQuePasaronPorPizarraConSecuencia(
+			Session session2, Transaction tx){
+		/* Pendiente enviar el parámetro al metodo lo voy a hardcodear como prueba*/
+		
+		System.out.println("Obtener las tareas que hayan pasado por la pizarra cuyo nombre contenga una"
+				+ "secuencia de caracteres obtenida como parámetro. Imprimir Tarea: Descripción");
+		System.out.println("----------interlineado--------");
+		
+		List<Tarea> tareas = session.createQuery("select t from Pizarra p inner join p.tareas t where p.nombre like :nombreDePizarra ").setParameter("nombreDePizarra", "%"+"backlogproyecto7427"+"%").list();
+		for(Tarea tarea: tareas){
+			System.out.println("Tarea: "+tarea.getDescripcion());
+		}
+		return tareas;
+	}
+
 	public static void listarNombresPizarras(Session sesion, Transaction t){
 		System.out.println("Listar los nombres de todas las pizarras");
 		System.out.println("----------interlineado--------");
 		List<String> nombres= sesion.createQuery(" select p.nombre from Pizarra p").list();
 		for(String unNombre: nombres){
-			System.out.println(unNombre);
+			System.out.println("Pizarra: "+unNombre);
 		}
 	}
 	
-	public static void mailDeAdminsConPizarraArchivada(Session sesion, Transaction t){
+	public static List<String> mailDeAdminsConPizarraArchivada(Session sesion, Transaction t){
 		System.out.println("Obtener	los emails de los administradores de los proyectos que tengan al menos una pizarra archivada.");
 		System.out.println("----------interlineado--------");
 		List<String> coleccion= sesion.createQuery("select usuario.email from PerfilDeAdministrador as PDA where PDA IN "
@@ -100,6 +117,7 @@ public class Queries {
 		for(String iteracion: coleccion){
 			System.out.println("Administrador: "+iteracion);
 		}
+		return coleccion;
 	}
 	
 	private static void pizarraConMasTareas(Session sesion, Transaction t){
