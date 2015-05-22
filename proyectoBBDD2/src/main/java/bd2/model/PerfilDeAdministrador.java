@@ -30,16 +30,14 @@ public class PerfilDeAdministrador extends PerfilDeUsuario{
 	}
 
 	private Boolean creador;
-	private Long idAdministrador;
+	
 	
 //	public Boolean getEsCreador() {
 //		return esCreador;
 //	}
 	
 
-	public Long getIdAdministrador() {
-		return idAdministrador;
-	}
+
 
 	public Boolean getCreador() {
 	return creador;
@@ -47,10 +45,6 @@ public class PerfilDeAdministrador extends PerfilDeUsuario{
 	
 	public void setCreador(Boolean creador) {
 		this.creador = creador;
-	}
-	
-	public void setIdAdministrador(Long idAdministrador) {
-		this.idAdministrador = idAdministrador;
 	}
 	
 	public boolean esCreador(){

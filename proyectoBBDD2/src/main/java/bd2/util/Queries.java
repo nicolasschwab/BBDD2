@@ -59,8 +59,8 @@ public class Queries {
 				case 'a': listarNombresPizarras(session,tx); break;
 				case 'c': pizarraConMasTareas(session,tx);break;
 				case 'd': mailDeAdminsConPizarraArchivada(session,tx); break;
-				case 'e': obtenerTareasQuePasaronPorPizarraConSecuencia(session,tx,"backlogproyecto7427"); break;
-				case 'f': obtenerTareasCambiadasDePizarraMasDeVeces(session,tx,1); break;
+				case 'e': obtenerTareasQuePasaronPorPizarraConSecuencia(session,tx,"backlogproyecto8149"); break;
+				case 'f': obtenerTareasCambiadasDePizarraMasDeVeces(session,tx,2); break;
 			}
 			System.out.println("----------interlineado--------");
 			session.flush();

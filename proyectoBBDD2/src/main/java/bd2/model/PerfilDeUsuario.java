@@ -32,12 +32,12 @@ public class PerfilDeUsuario {
 	
 	protected Usuario usuario;
 	protected Date fechaDeCreacion;
-	private Long idPerfilUsuario;
+	protected Long idPerfilUsuario;
 	
-	public Long getIdPerfilUsuario() {
+	protected Long getIdPerfilUsuario() {
 		return idPerfilUsuario;
 	}
-	public void setIdPerfilUsuario(Long idPerfilUsuario) {
+	protected void setIdPerfilUsuario(Long idPerfilUsuario) {
 		this.idPerfilUsuario = idPerfilUsuario;
 	}
 	/**

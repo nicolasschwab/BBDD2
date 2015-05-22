@@ -37,12 +37,13 @@ public abstract class Tarea {
 	protected Boolean completa;
 	protected Date fechaLimite;
 	protected String descripcion;
-	private Collection<Paso> pasos=new ArrayList<Paso>();
-	private Long idTarea;
-	public Long getIdTarea() {
+	protected Collection<Paso> pasos=new ArrayList<Paso>();
+	protected Long idTarea;
+	
+	private Long getIdTarea() {
 		return idTarea;
 	}
-	public void setIdTarea(Long idTarea) {
+	private void setIdTarea(Long idTarea) {
 		this.idTarea = idTarea;
 	}
 	/**
