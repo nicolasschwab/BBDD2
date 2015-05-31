@@ -30,11 +30,13 @@ public class Queries {
 			buildSessionFactory();
 			session = sessionFactory.openSession();
 			listarNombresPizarras();
+			tareasConDescripcionEspecifica("news");
 			pizarraConMasTareas();
 			mailDeAdminsConPizarraArchivada();
 			obtenerTareasQuePasaronPorPizarraConSecuencia("backlogproyecto8149");
 			obtenerTareasCambiadasDePizarraMasDeVeces(2);
-			tareasConDescripcionEspecifica("news");
+			pizarrasConTareaDeInvestigacionYDesarrollo();
+			
 			session.close();
 //			session.disconnect();
 		} catch (Exception e) {
@@ -141,7 +143,7 @@ public class Queries {
 	
 	
 
-	public static List<String> mailDeAdminsConPizarraArchivada() {
+	public static void mailDeAdminsConPizarraArchivada() {
 		System.out
 				.println("Obtener	los emails de los administradores de los proyectos que tengan al menos una pizarra archivada.");
 		System.out.println("----------interlineado--------");
@@ -168,7 +170,7 @@ public class Queries {
 				tx.rollback();
 			}
 		}
-		return coleccion;
+		
 
 	}
 
@@ -223,6 +225,32 @@ public class Queries {
 			}
 		}
 	}
+	public static void pizarrasConTareaDeInvestigacionYDesarrollo (){
+		System.out.println("----------interlineado--------");
+		System.out.println("Listar las pizarras que tengan tareas tanto de investigación como de desarrollo");
+		System.out.println("----------interlineado--------");
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.beginTransaction();
+			List<String> nombres = session.createQuery("select p.nombre from Pizarra p  where p IN "+"(select p1 from Pizarra p1 where p1 IN"+"(select pi from Pizarra pi inner join pi.tareas t where t.class = TareaDeInvestigacion)) and p IN "+"(select p2 from Pizarra p2 where p2 IN"+"(select pi1 from Pizarra pi1 inner join pi1.tareas t where t.class = TareaDeDesarrollo))").list();
+			tx.rollback();
+			for (String unNombre : nombres) {
+				System.out.println("Tarea: " + unNombre);
+		
+			}	
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
+	}
+
 
 }
 
