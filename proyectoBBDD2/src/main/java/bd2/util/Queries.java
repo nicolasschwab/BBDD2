@@ -34,6 +34,7 @@ public class Queries {
 			mailDeAdminsConPizarraArchivada();
 			obtenerTareasQuePasaronPorPizarraConSecuencia("backlogproyecto8149");
 			obtenerTareasCambiadasDePizarraMasDeVeces(2);
+			tareasConDescripcionEspecifica("news");
 			session.close();
 //			session.disconnect();
 		} catch (Exception e) {
@@ -137,6 +138,8 @@ public class Queries {
 		}
 
 	}
+	
+	
 
 	public static List<String> mailDeAdminsConPizarraArchivada() {
 		System.out
@@ -175,8 +178,7 @@ public class Queries {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			Query nombres = session
-					.createQuery(" select p,p.tareas.size as cant from Pizarra p order by cant desc");
+			Query nombres = session.createQuery(" select p,p.tareas.size as cant from Pizarra p order by cant desc");
 			nombres.setMaxResults(1);
 			Object tarea = nombres.uniqueResult();
 
@@ -193,6 +195,33 @@ public class Queries {
 			}
 		}
 
+	}
+	public static void tareasConDescripcionEspecifica (String parametroDescripcion){
+		System.out.println("----------interlineado--------");
+		System.out.println("Listar las tareas cuya descripción contenga una secuencia específica de caracteres dado por el parámetro "+parametroDescripcion);
+		System.out.println("----------interlineado--------");
+		Transaction tx = null;
+		List <String> nombres = null;
+		try
+		{
+			tx = session.beginTransaction();
+			 nombres = session.createQuery(" select t.descripcion  from Tarea t where t.descripcion like :descripcion")
+									.setParameter("descripcion", "%"+parametroDescripcion+"%")
+									.list();
+
+			tx.rollback();
+			for (String unNombre : nombres) {
+				System.out.println("Tarea: " + unNombre);
+		
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
 	}
 
 }
