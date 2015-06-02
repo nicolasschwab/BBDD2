@@ -1,5 +1,7 @@
 package bd2.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -36,9 +38,10 @@ public class Queries {
 			obtenerTareasQuePasaronPorPizarraConSecuencia("backlogproyecto8149");
 			obtenerTareasCambiadasDePizarraMasDeVeces(2);
 			pizarrasConTareaDeInvestigacionYDesarrollo();
+			pizarrasConTareasVencidas();
 			
 			session.close();
-//			session.disconnect();
+			session.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -250,7 +253,62 @@ public class Queries {
 			}
 		}
 	}
-
-
+	
+	public static void pizarrasConTareasVencidad (){
+		System.out.println("----------interlineado--------");
+		System.out.println("Obtener las pizarras que tengan tareas vencidas en marzo");
+		System.out.println("----------interlineado--------");
+		Transaction tx = null;
+		
+		try
+		{
+			tx = session.beginTransaction();
+			List<String> nombres = session.createQuery("select p.nombre from Pizarra p  where p IN "+"(select p1 from Pizarra p1 where p1 IN"+"(select pi from Pizarra pi inner join pi.tareas t where t.class = TareaDeInvestigacion)) and p IN "+"(select p2 from Pizarra p2 where p2 IN"+"(select pi1 from Pizarra pi1 inner join pi1.tareas t where t.class = TareaDeDesarrollo))").list();
+			tx.rollback();
+			for (String unNombre : nombres) {
+				System.out.println("Pizarra: " + unNombre);
+		
+			}	
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
+	}
+	public static void pizarrasConTareasVencidas (){
+		System.out.println("----------interlineado--------");
+		System.out.println("Obtener las pizarras que tengan tareas vencidas en marzo");
+		System.out.println("----------interlineado--------");
+		Transaction tx = null;
+		
+		try
+		{	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			Date finish= format.parse("2015-03-31");
+			Date start=format.parse("2015-03-01");
+			
+			tx = session.beginTransaction();
+			List<String> nombres = session.createQuery("select distinct  p.nombre from Pizarra p, Tarea t where t.completa=false and t.fechaLimite between :comienzo and :final and t in elements(p.tareas)")
+					.setParameter("comienzo",start)
+					.setParameter("final", finish)
+					.list();
+			tx.rollback();
+			for (String unNombre : nombres) {
+				System.out.println("Pizarra: " + unNombre);
+		
+			}	
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			if (tx != null) {
+				tx.rollback();
+			}
+		}
+	}
 }
 
