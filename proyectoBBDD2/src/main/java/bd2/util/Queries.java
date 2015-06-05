@@ -15,7 +15,11 @@ import bd2.model.PerfilDeAdministrador;
 import bd2.model.PerfilDeUsuario;
 import bd2.model.Pizarra;
 import bd2.model.Tarea;
-
+/**
+ * 
+ * Clase que realiza las Consultas a la Base de Datos de la Etapa 3
+ *
+ */
 public class Queries {
 
 	private static SessionFactory sessionFactory;
@@ -25,7 +29,10 @@ public class Queries {
 		sessionFactory = new Configuration().configure(
 				"hibernate/hibernate.cfg.xml").buildSessionFactory();
 	}
-
+/**
+ * Método main que llama a las consultas de clase Queries
+ * @param args
+ */
 	public static void main(String[] args) {
 
 		try {
@@ -47,6 +54,11 @@ public class Queries {
 		}
 
 	}
+	/**
+	 * Consulta que devuelve las tareas que hayan sido cambiadas de pizzarra
+	 * 		
+	 * 
+	 */
 
 	public static List<Tarea> obtenerTareasCambiadasDePizarraMasDeVeces(
 			Integer cantidad) {
@@ -85,10 +97,15 @@ public class Queries {
 		return tareas;
 
 	}
+	/**
+	 * Consulta que devuelve las tareas que hayan sido pasadas por la pizarra cuyo nombre contenga una secuencia de caracteres obtenida como parámetro
+	 * 	@param secuencia 
+	 * 		String enviado como parámetro
+	 */
 
 	public static List<Tarea> obtenerTareasQuePasaronPorPizarraConSecuencia(
 			String secuencia) {
-
+		System.out.println("----------interlineado--------");
 		System.out
 				.println("Obtener las tareas que hayan pasado por la pizarra cuyo nombre contenga una"
 						+ "secuencia de caracteres obtenida como parámetro. Imprimir Tarea: Descripción");
@@ -119,8 +136,13 @@ public class Queries {
 
 		return tareas;
 	}
-
+	/**
+	 * Consulta que devuelve una lista con los nombres de todas las pizarras
+	 * 	
+	 * 		
+	 */
 	public static void listarNombresPizarras() {
+		System.out.println("----------interlineado--------");
 		System.out.println("Listar los nombres de todas las pizarras");
 		System.out.println("----------interlineado--------");
 		List<String> nombres = null;
@@ -145,8 +167,13 @@ public class Queries {
 	}
 	
 	
-
+	/**
+	 * Consulta que devuelve los emails de los administradores de los proyectos que tengan al menos una pizarra archivada
+	 * 	
+	 * 		
+	 */
 	public static void mailDeAdminsConPizarraArchivada() {
+		System.out.println("----------interlineado--------");
 		System.out
 				.println("Obtener	los emails de los administradores de los proyectos que tengan al menos una pizarra archivada.");
 		System.out.println("----------interlineado--------");
@@ -176,8 +203,13 @@ public class Queries {
 		
 
 	}
-
+	/**
+	 * Consulta que devuelve la pizarra con mas tareas
+	 * 	
+	 * 		
+	 */
 	private static void pizarraConMasTareas() {
+		System.out.println("----------interlineado--------");
 		System.out.println("Obtener la Pizarra que tenga más tareas");
 		System.out.println("----------interlineado--------");
 		Transaction tx = null;
@@ -201,6 +233,11 @@ public class Queries {
 		}
 
 	}
+	/**
+	 * Consulta que devuelve una lista cuya descripción contenga una secuencia fija de caracteres dado por parámetro
+	 * 	@param parametroDescripcion 
+	 * 		String enviado como parámetro
+	 */
 	public static void tareasConDescripcionEspecifica (String parametroDescripcion){
 		System.out.println("----------interlineado--------");
 		System.out.println("Listar las tareas cuya descripción contenga una secuencia específica de caracteres dado por el parámetro "+parametroDescripcion);
@@ -228,6 +265,11 @@ public class Queries {
 			}
 		}
 	}
+	/**
+	 * Consulta que devuelve una lista con las pizarras que tengan tanto tarea de investigación como de desarrollo
+	 * 	
+	 * 		
+	 */
 	public static void pizarrasConTareaDeInvestigacionYDesarrollo (){
 		System.out.println("----------interlineado--------");
 		System.out.println("Listar las pizarras que tengan tareas tanto de investigación como de desarrollo");
@@ -253,32 +295,11 @@ public class Queries {
 			}
 		}
 	}
-	
-	public static void pizarrasConTareasVencidad (){
-		System.out.println("----------interlineado--------");
-		System.out.println("Obtener las pizarras que tengan tareas vencidas en marzo");
-		System.out.println("----------interlineado--------");
-		Transaction tx = null;
-		
-		try
-		{
-			tx = session.beginTransaction();
-			List<String> nombres = session.createQuery("select p.nombre from Pizarra p  where p IN "+"(select p1 from Pizarra p1 where p1 IN"+"(select pi from Pizarra pi inner join pi.tareas t where t.class = TareaDeInvestigacion)) and p IN "+"(select p2 from Pizarra p2 where p2 IN"+"(select pi1 from Pizarra pi1 inner join pi1.tareas t where t.class = TareaDeDesarrollo))").list();
-			tx.rollback();
-			for (String unNombre : nombres) {
-				System.out.println("Pizarra: " + unNombre);
-		
-			}	
-			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			if (tx != null) {
-				tx.rollback();
-			}
-		}
-	}
+	/**
+	 * Consulta que devuelve una lista con las pizarras que tengan tareas vencidas en marzo
+	 * 	
+	 * 
+	 */
 	public static void pizarrasConTareasVencidas (){
 		System.out.println("----------interlineado--------");
 		System.out.println("Obtener las pizarras que tengan tareas vencidas en marzo");
