@@ -16,11 +16,11 @@
 		<property name="hibernate.connection.username">Grupo8</property>
 		<property name="hibernate.connection.password">Grupo8</property>
 		
-		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.show_sql">false</property>
 		<property name="hibernate.format_sql">
 			true
 		</property>
-		<property name="hibernate.hbm2ddl.auto" >create/update</property> <!-- CONSULTAAAAR, ESTA LINEA LA SAQUE DE MI TRABAJO DE TALLER, NO APARECIA EN NADA DE ESTA MATERIA, PERO SIN ELLA NO ME CREA LA BASE DE DATOS -->
+		<property name="hibernate.hbm2ddl.auto" >update</property> <!-- CONSULTAAAAR, ESTA LINEA LA SAQUE DE MI TRABAJO DE TALLER, NO APARECIA EN NADA DE ESTA MATERIA, PERO SIN ELLA NO ME CREA LA BASE DE DATOS -->
 																	<!--  TAMBIEN CONSULTAR LA LINEA 95 DEL TEST HIBERNATETESTCASE.JAVA DADO QUE ME SALTA UN ERROR DICIENDO JAVA.LANG.INTEGER CANNOT BE CAST TO JAVA.LANG.LONG -->
 		<mapping resource="hibernate/mappings.hbm.xml" />
 

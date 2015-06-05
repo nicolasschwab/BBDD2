@@ -48,7 +48,7 @@ public class Queries {
 			pizarrasConTareasVencidas();
 			
 			session.close();
-			session.disconnect();
+//			session.disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -68,7 +68,7 @@ public class Queries {
 				.println("--------------------------------------------------------- interlineado --------------------------------------------------");
 
 		System.out
-				.println("Obtener las tareas que hayan sido cambiadas de pizarra"
+				.println("Obtener las tareas que hayan sido cambiadas de pizarra "
 						+ "mas de un numero de veces enviado como parámetro. Imprimir: Tarea: descripcion (cantidadDePasos)");
 		System.out.println("----------interlineado--------");
 		Transaction tx = null;
@@ -85,7 +85,6 @@ public class Queries {
 			for (Tarea tarea : tareas) {
 				System.out.println("Tarea: " + tarea.getDescripcion() + "("
 						+ tarea.getPasos().size() + ")");
-				System.out.println("----------interlineado--------");
 			}
 
 		} catch (Exception e) {
@@ -117,7 +116,7 @@ public class Queries {
 			tx = session.beginTransaction();
 			tareas = session
 					.createQuery(
-							"select t from Pizarra p inner join p.tareas t where p.nombre like :nombreDePizarra ")
+							"select t from Pizarra p inner join p.tareas t inner join t.pasos ps where ps.pizarra.nombre like :nombreDePizarra ")
 					.setParameter("nombreDePizarra", parametroConFormato)
 					.list();
 
@@ -282,7 +281,7 @@ public class Queries {
 			List<String> nombres = session.createQuery("select p.nombre from Pizarra p  where p IN "+"(select p1 from Pizarra p1 where p1 IN"+"(select pi from Pizarra pi inner join pi.tareas t where t.class = TareaDeInvestigacion)) and p IN "+"(select p2 from Pizarra p2 where p2 IN"+"(select pi1 from Pizarra pi1 inner join pi1.tareas t where t.class = TareaDeDesarrollo))").list();
 			tx.rollback();
 			for (String unNombre : nombres) {
-				System.out.println("Tarea: " + unNombre);
+				System.out.println("Pizarra: " + unNombre);
 		
 			}	
 			
